@@ -1,43 +1,18 @@
 import React from "react"
 
 
-function Post() {
+function Post(props) {
+    const [heart, setHeart] = React.useState("heart-outline")
 
-    let arrayPost = [{
-        HeaderImage: "assets/img/meowed.svg",
-        HeaderUser: "meowed",
-        ContentImage: "assets/img/gato-telefone.svg",
-        LikesImage: "assets/img/respondeai.svg",
-        NumLikes: 13.000,
-        LikesUser: "respondeai"
-    }, {
-        HeaderImage: "assets/img/barked.svg",
-        HedaerUser: "barked",
-        ContentImage: "assets/img/dog.svg",
-        LikesImage: "assets/img/adorable_animals.svg",
-        NumLikes: 101.523,
-        LikesUser: "adorable_animals"
-    }
-    ]
-
-    // no map dps do => {postnão pode usar {}, tem q usar nada ou ()
-    const post = arrayPost.map(post => (
-        <div class="post">
-            <PostHeader image={post.HeaderImage} user={post.HeaderUser}
-            />
-            <PostContent
-                contentImage={post.ContentImage}
-            />
-            <PostFooter
-                LikesUser={post.LikesUser}
-                LikesImage={post.LikesImage}
-            />
-        </div>)
-    )
+    // no map dps do => não pode usar {}, tem q usar nada ou ()
 
     return (
-        <div class="posts">
-            {post}
+        <div class="post">
+            <PostHeader {...props} />
+
+            <PostContent {...props} heart={heart} setHeart={setHeart} />
+
+            <PostFooter {...props} heart={heart} setHeart={setHeart} />
         </div>
     )
 }
@@ -46,8 +21,8 @@ function PostHeader(props) {
     return (
         <div class="topo">
             <div class="usuario">
-                <img src={props.image} />
-                {props.user}
+                <img src={props.HeaderImage} />
+                {props.HeaderUser}
             </div>
             <div class="acoes">
                 <ion-icon name="ellipsis-horizontal"></ion-icon>
@@ -57,34 +32,37 @@ function PostHeader(props) {
 }
 
 function PostContent(props) {
+
+    function toggleLike() {
+        if (props.heart === "heart-outline") {
+            props.setHeart("heart");
+        } else {
+            props.setHeart("heart-outline");
+        }
+    }
+
     return (
-        <div class="conteudo">
-            <img src={props.contentImage} />
+        <div class="conteudo"  onDoubleClick={toggleLike}  >
+            <img src={props.ContentImage} />
         </div>
     )
 }
 
 function PostFooter(props) {
-    /* function likezin() {
-        if (contador === ""){
-            setLikeColor("like")
-        }else{
-            setLikeColor("")
-        }
-        
-    } */
 
-    const [likeColor, setLikeColor] = React.useState("like")
-    const [heartColor , setHeartColor] = React.useState("heart")
+    function toggleLike() {
+        if (props.heart === "heart-outline") {
+            props.setHeart("heart");
+        } else {
+            props.setHeart("heart-outline");
+        }
+    }
 
     return (
         <div class="fundo">
             <div class="acoes" >
                 <div >
-                    <ion-icon class={likeColor} name={heartColor} onClick={() => {
-                        setLikeColor("like");
-                        setHeartColor("heart");
-                    }}> 
+                    <ion-icon  name={props.heart} onClick={toggleLike} >
                     </ion-icon>
                     <ion-icon name="chatbubble-outline" ></ion-icon>
                     <ion-icon name="paper-plane-outline"></ion-icon>
@@ -105,17 +83,5 @@ function PostFooter(props) {
 
     )
 }
-
-/* function Actions() {
-    return (
-        
-    )
-}
-
-function Likes(props) {
-    return (
-        
-    )
-} */
 
 export default Post;

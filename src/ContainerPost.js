@@ -1,46 +1,40 @@
 import Post from './Post'
 
-
-
 function ContainerPost() {
 
- /*  let arrayPost = [{
+  let arrayPost = [{
     HeaderImage: "assets/img/meowed.svg",
     HeaderUser: "meowed",
     ContentImage: "assets/img/gato-telefone.svg",
     LikesImage: "assets/img/respondeai.svg",
-    NumLikes: 13.000,
+    NumLikes: "13.000",
     LikesUser: "respondeai"
 }, {
     HeaderImage: "assets/img/barked.svg",
     HedaerUser: "barked",
     ContentImage: "assets/img/dog.svg",
     LikesImage: "assets/img/adorable_animals.svg",
-    NumLikes: 101.523,
+    NumLikes: "101.523",
     LikesUser: "adorable_animals"
 }
-]
+  ]
 
-// no map dps do => não pode usar {}, tem q usar nada ou ()
-const post = arrayPost.map(post => (
-    <>
-        <PostHeader image={post.HeaderImage} user={post.HeaderUser}
-        />
-        <PostContent
-            contentImage={post.ContentImage}
-        />
-        <PostFooter
-            LikesUser={post.LikesUser}
-            LikesImage={post.LikesImage}
-        />
-    </>)
-) */
+/*   arrayPost.map(post =>{
+    return <Post {...post}/>
+  })}
+
+  arrayPost.map(post =>
+     <Post {...post}/>
+  ) */
 
   return (
-    <>
-      <Post />
-    </>
-  )
+    <div class="posts">
+      {arrayPost.map(post =>{
+        return <Post {...post}/>
+      })}
+      
+    </div>
+    )
 }
 
 export default ContainerPost;

@@ -180,9 +180,13 @@ body {
   cursor: pointer;
 }
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
-.like{
+.liked{
   color: red;
 }
+
+.acoes ion-icon[name=heart]{ 
+  color: red; 
+} 
 .save{
   background-color: #000;
 }
